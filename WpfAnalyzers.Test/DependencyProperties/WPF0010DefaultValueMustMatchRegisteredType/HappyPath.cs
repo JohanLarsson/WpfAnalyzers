@@ -118,7 +118,7 @@ public class FooControl : Control
         }
 
         [Test]
-        public async Task DependencyPropertyGeneric(string setValueCall)
+        public async Task DependencyPropertyGeneric()
         {
             var testCode = @"
 using System.Windows;
@@ -129,7 +129,7 @@ public class FooControl<T> : Control
     public static readonly DependencyProperty BarProperty = DependencyProperty.Register(
         ""Bar"",
         typeof(T),
-        typeof(FooControl),
+        typeof(FooControl<T>),
         new PropertyMetadata(default(T)));
 
     public T Bar

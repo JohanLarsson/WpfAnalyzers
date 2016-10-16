@@ -60,7 +60,7 @@ public class FooControl<T> : Control
     public static readonly DependencyProperty BarProperty = DependencyProperty.Register(
         ""Bar"",
         typeof(T),
-        typeof(FooControl),
+        typeof(FooControl<T>),
         new PropertyMetadata(↓1));
 
     public T Bar
@@ -71,7 +71,7 @@ public class FooControl<T> : Control
 }";
             var expected = this.CSharpDiagnostic()
                                .WithLocationIndicated(ref testCode)
-                               .WithMessage("FooControl.ValueProperty");
+                               .WithMessage("Default value for 'FooControl<T>.BarProperty' must be of type T");
             await this.VerifyCSharpDiagnosticAsync(testCode, expected).ConfigureAwait(false);
 
         }

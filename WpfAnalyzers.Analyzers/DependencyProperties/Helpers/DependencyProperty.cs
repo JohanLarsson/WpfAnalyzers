@@ -70,7 +70,12 @@
                 ArgumentSyntax arg;
                 if (invocation.TryGetArgumentAtIndex(1, out arg))
                 {
-                    return arg.TryGetTypeofValue(semanticModel, cancellationToken, out result);
+                    if (!arg.TryGetTypeofValue(semanticModel, cancellationToken, out result))
+                    {
+                        return false;
+                    }
+
+                    return result != null;
                 }
 
                 return false;
